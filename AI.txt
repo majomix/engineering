@@ -1,0 +1,6 @@
+- generative ai -> any type of ai that can be used to create new stuff
+- studio.d-id.com -> creates speaking videos from pictures
+- ecrettmusic.com -> create own music
+- discrimitive ai -> categorization, image recognition
+- chat generative pre-trained transformer
+- large language model (llm)
