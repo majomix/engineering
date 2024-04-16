@@ -4,3 +4,4 @@
 - discrimitive ai -> categorization, image recognition
 - chat generative pre-trained transformer
 - large language model (llm)
+
