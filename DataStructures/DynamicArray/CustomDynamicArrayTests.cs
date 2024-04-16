@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using DataStructures.Helpers;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace DataStructures.DynamicArray
@@ -7,7 +8,7 @@ namespace DataStructures.DynamicArray
     internal class CustomDynamicArrayTests
     {
         [Test]
-        public void List_AddsItems_Count()
+        public void List_AddItems_CountCorrect()
         {
             // arrange
             var list = new CustomDynamicArray<int>();
@@ -22,7 +23,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_AddsItems_Resize_Count()
+        public void List_AddItems_Resize_CountCorrect()
         {
             // arrange
             var list = new CustomDynamicArray<int>();
@@ -44,7 +45,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_AddsLargeAmountOfItems_Resize_Count()
+        public void List_AddLargeAmountOfItems_Resize_CountCorrect()
         {
             // arrange
             var count = 2_000_000u;
@@ -63,7 +64,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_AddsLargeAmountOfItems_Resize_CustomFactors_Addition_Count()
+        public void List_AddLargeAmountOfItems_Resize_CustomFactors_Addition_CountCorrect()
         {
             // arrange
             var count = 10_000u;
@@ -82,7 +83,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_AddsLargeAmountOfItems_Preallocation_Count()
+        public void List_AddLargeAmountOfItems_Preallocation_CountCorrect()
         {
             // arrange
             var count = 2_000_000u;
@@ -101,7 +102,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Count()
+        public void List_CopyConstructor_CountCorrect()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -115,7 +116,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Clear_Count()
+        public void List_CopyConstructor_Clear_CountCorrect()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -130,7 +131,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Remove_Count_Items()
+        public void List_CopyConstructor_Remove_CountCorrect_ItemsCorrect()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -148,7 +149,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Remove_LastCount_Items()
+        public void List_CopyConstructor_RemoveLastItem_CountCorrect_ItemsCorrect()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -216,7 +217,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Contains_False()
+        public void List_CopyConstructor_ContainsFalse()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -231,7 +232,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Contains_True()
+        public void List_CopyConstructor_ContainsTrue()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -246,7 +247,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Insert_Front()
+        public void List_CopyConstructor_InsertFront()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -265,7 +266,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Insert_Back()
+        public void List_CopyConstructor_InsertBack()
         {
             var backingArray = new[] { 1, 2, 3 };
 
@@ -285,7 +286,7 @@ namespace DataStructures.DynamicArray
 
 
         [Test]
-        public void List_CopyConstructor_Insert_Middle()
+        public void List_CopyConstructor_InsertMiddle()
         {
             var backingArray = new[] { 1, 2, 3, 4, 5, 6, 7 };
 
@@ -308,7 +309,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Contains_CustomEquatable_True()
+        public void List_CopyConstructor_Contains_CustomEquatableTrue()
         {
             // arrange
             var list = new CustomDynamicArray<CustomEquatableClass> { new(true) };
@@ -321,7 +322,7 @@ namespace DataStructures.DynamicArray
         }
 
         [Test]
-        public void List_CopyConstructor_Contains_CustomEquatable_False()
+        public void List_CopyConstructor_Contains_CustomEquatableFalse()
         {
             // arrange
             var list = new CustomDynamicArray<CustomEquatableClass> { new(false) };
@@ -367,38 +368,6 @@ namespace DataStructures.DynamicArray
             enumerator.Current.Should().Be(backingArray[0]);
 
             enumerator.Dispose();
-        }
-
-        private class CustomEquatableClass : IEquatable<CustomEquatableClass>
-        {
-            private readonly bool _shouldBeEqual;
-
-            public CustomEquatableClass(bool shouldBeEqual)
-            {
-                _shouldBeEqual = shouldBeEqual;
-            }
-
-            public bool Equals(CustomEquatableClass? other)
-            {
-                if (other == null)
-                    return false;
-
-                return _shouldBeEqual && other._shouldBeEqual;
-            }
-
-            public override bool Equals(object? obj)
-            {
-                if (obj is null)
-                    return false;
-                if (ReferenceEquals(this, obj))
-                    return true;
-                return obj.GetType() == GetType() && Equals((CustomEquatableClass)obj);
-            }
-
-            public override int GetHashCode()
-            {
-                return base.GetHashCode();
-            }
         }
     }
 }
