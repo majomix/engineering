@@ -2,6 +2,9 @@
 
 namespace DataStructures.Stack
 {
+    /// <summary>
+    /// Custom implementation of Last In First Out collection based on dynamic array.
+    /// </summary>
     public class CustomStackByDynamicArray<T> : ICustomStack<T>
     {
         private const int InitialArraySize = 4;

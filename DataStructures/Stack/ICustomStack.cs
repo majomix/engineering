@@ -1,8 +1,5 @@
 ﻿namespace DataStructures.Stack
 {
-    /// <summary>
-    /// Custom implementation of Last In First Out collection.
-    /// </summary>
     public interface ICustomStack<T>
     {
         /// <summary>
@@ -11,7 +8,7 @@
         uint Count { get; }
 
         /// <summary>
-        /// Adds an item at the end of the stack, resizing it if needed.
+        /// Adds an item to the stack, resizing it if needed.
         /// </summary>
         /// <param name="value">Item to add.</param>
         void Push(T value);

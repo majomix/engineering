@@ -12,15 +12,13 @@ namespace DataStructures.Stack
             CircularDoublyLinkedList
         }
 
-        private ICustomStack<int> stack;
-
         [Test]
         [TestCase(StackType.DynamicArray)]
         [TestCase(StackType.CircularDoublyLinkedList)]
         public void Stack_PushPopPeekCount(StackType type)
         {
             // arrange
-            stack = CreateStack(type);
+            var stack = CreateStack(type);
 
             // act
             stack.Push(1);

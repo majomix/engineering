@@ -2,6 +2,9 @@
 
 namespace DataStructures.Stack
 {
+    /// <summary>
+    /// Custom implementation of Last In First Out collection based on circular doubly linked list.
+    /// </summary>
     public class CustomStackByLinkedList<T> : ICustomStack<T>
     {
         private readonly CustomCircularDoublyLinkedList<T> _linkedList = new();
