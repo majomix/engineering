@@ -2,29 +2,15 @@
 
 namespace DataStructures.Stack
 {
-    /// <summary>
-    /// Custom implementation of Last In First Out collection.
-    /// </summary>
-    public interface ICustomStack<T>
+    public class CustomStackByDynamicArray<T> : ICustomStack<T>
     {
-        void Push(T item);
-        T? Pop();
-        T? Peek();
-        void Clear();
-    }
+        private const int InitialArraySize = 4;
 
-    public class CustomStack<T> : ICustomStack<T>
-    {
-        private CustomDynamicArray<T> _array;
+        private readonly CustomDynamicArray<T> _array;
 
-        public uint Count { get; private set; }
+        public uint Count => _array.Count;
 
-        public CustomStack()
-        {
-            _array = new CustomDynamicArray<T>();
-        }
-
-        public CustomStack(uint capacity)
+        public CustomStackByDynamicArray(uint capacity = InitialArraySize)
         {
             _array = new CustomDynamicArray<T>(capacity);
         }
@@ -32,7 +18,6 @@ namespace DataStructures.Stack
         public void Push(T item)
         {
             _array.Add(item);
-            Count++;
         }
 
         public T? Pop()
@@ -40,7 +25,9 @@ namespace DataStructures.Stack
             if (Count == 0)
                 return default;
 
-            var item = _array[--Count];
+            var indexToPop = Count - 1;
+            var item = _array[indexToPop];
+            _array.RemoveAt(indexToPop);
 
             return item;
         }
@@ -56,7 +43,6 @@ namespace DataStructures.Stack
         public void Clear()
         {
             _array.Clear();
-            Count = 0;
         }
     }
 }

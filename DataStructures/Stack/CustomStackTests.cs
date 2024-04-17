@@ -6,11 +6,21 @@ namespace DataStructures.Stack
     [TestFixture]
     internal class CustomStackTests
     {
+        public enum StackType
+        {
+            DynamicArray,
+            CircularDoublyLinkedList
+        }
+
+        private ICustomStack<int> stack;
+
         [Test]
-        public void Stack_PushPopPeekCount()
+        [TestCase(StackType.DynamicArray)]
+        [TestCase(StackType.CircularDoublyLinkedList)]
+        public void Stack_PushPopPeekCount(StackType type)
         {
             // arrange
-            var stack = new CustomStack<int>();
+            stack = CreateStack(type);
 
             // act
             stack.Push(1);
@@ -43,10 +53,12 @@ namespace DataStructures.Stack
         }
 
         [Test]
-        public void Stack_Push_Clear_Count()
+        [TestCase(StackType.DynamicArray)]
+        [TestCase(StackType.CircularDoublyLinkedList)]
+        public void Stack_Push_Clear_Count(StackType type)
         {
             // arrange
-            var stack = new CustomStack<int>();
+            var stack = CreateStack(type);
             stack.Push(1);
             stack.Push(2);
 
@@ -55,6 +67,41 @@ namespace DataStructures.Stack
             
             // assert
             stack.Count.Should().Be(0);
+        }
+
+        [Test]
+        [TestCase(StackType.DynamicArray)]
+        [TestCase(StackType.CircularDoublyLinkedList)]
+        public void Stack_RepeatedPushPop_Count(StackType type)
+        {
+            // arrange
+            var stack = CreateStack(type);
+            stack.Push(1);
+            stack.Pop();
+            stack.Push(2);
+            stack.Pop();
+            stack.Push(3);
+            stack.Push(4);
+
+            // act
+            var finalPop = stack.Pop();
+
+            // assert
+            stack.Count.Should().Be(1);
+            finalPop.Should().Be(4);
+        }
+
+        private ICustomStack<int> CreateStack(StackType type)
+        {
+            switch (type)
+            {
+                case StackType.DynamicArray:
+                    return new CustomStackByDynamicArray<int>();
+                case StackType.CircularDoublyLinkedList:
+                    return new CustomStackByLinkedList<int>();
+                default:
+                    throw new ArgumentException("unexpected type");
+            }
         }
     }
 }

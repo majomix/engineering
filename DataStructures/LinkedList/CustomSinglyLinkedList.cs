@@ -3,7 +3,7 @@
 namespace DataStructures.LinkedList
 {
     /// <summary>
-    /// Custom alternative linked list.
+    /// Custom alternative singly linked list.
     /// </summary>
     public class CustomSinglyLinkedList<T> : ILinkedList<T>, ISinglyLinkedList<T>, IEnumerable<T>
     {
