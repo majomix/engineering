@@ -46,8 +46,10 @@ namespace DataStructures.Stack
             stack.Pop().Should().Be(1);
 
             stack.Count.Should().Be(0);
-            stack.Peek().Should().Be(default);
-            stack.Pop().Should().Be(default);
+            var peekEmpty = () => stack.Peek();
+            peekEmpty.Should().Throw<InvalidOperationException>();
+            var popEmpty = () => stack.Pop();
+            popEmpty.Should().Throw<InvalidOperationException>();
         }
 
         [Test]

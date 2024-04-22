@@ -17,12 +17,12 @@ namespace DataStructures.Queue
             Count++;
         }
 
-        public T? Dequeue()
+        public T Dequeue()
         {
             var headNode = _linkedList.GetHead();
 
             if (headNode == null)
-                return default;
+                throw new InvalidOperationException("Queue is empty.");
 
             _linkedList.RemoveNode(headNode);
             Count--;
@@ -30,12 +30,12 @@ namespace DataStructures.Queue
             return headNode.Value;
         }
 
-        public T? Peek()
+        public T Peek()
         {
             var headNode = _linkedList.GetHead();
 
             if (headNode == null)
-                return default;
+                throw new InvalidOperationException("Queue is empty.");
 
             return headNode.Value;
         }

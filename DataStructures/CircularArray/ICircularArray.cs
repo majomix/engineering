@@ -17,8 +17,16 @@
         /// <summary>
         /// Gets item at the current read index and advances the read pointer.
         /// </summary>
-        /// <returns>Item or <value>default</value> if <see cref="Count"/> is 0.</returns>
-        public T? Get();
+        /// <param name="value">Item or <value>default</value> if <see cref="Count"/> is 0.</param>
+        /// <returns>True if value is valid, false if not.</returns>
+        public bool TryGet(out T? value);
+
+        /// <summary>
+        /// Peeks at item at the current read index and advances the read pointer.
+        /// </summary>
+        /// <param name="value">Item or <value>default</value> if <see cref="Count"/> is 0.</param>
+        /// <returns>True if value is valid, false if not.</returns>
+        public bool TryPeek(out T? value);
 
         /// <summary>
         /// Clears the whole circular array.

@@ -23,10 +23,10 @@ namespace DataStructures.Stack
             _array.Add(item);
         }
 
-        public T? Pop()
+        public T Pop()
         {
             if (Count == 0)
-                return default;
+                throw new InvalidOperationException("Stack is empty.");
 
             var indexToPop = Count - 1;
             var item = _array[indexToPop];
@@ -35,10 +35,10 @@ namespace DataStructures.Stack
             return item;
         }
 
-        public T? Peek()
+        public T Peek()
         {
             if (Count == 0)
-                return default;
+                throw new InvalidOperationException("Stack is empty.");
 
             return _array[Count - 1];
         }

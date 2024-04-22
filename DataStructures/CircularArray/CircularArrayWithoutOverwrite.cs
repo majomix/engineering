@@ -1,26 +1,44 @@
-﻿namespace DataStructures.CircularArray
+﻿using DataStructures.CircularArray.Reallocation;
+using DataStructures.Helpers;
+
+namespace DataStructures.CircularArray
 {
     /// <summary>
     /// Single consumer circular array without overwriting.
     /// </summary>
     public class CircularArrayWithoutOverwrite<T> : ICircularArray<T>
     {
+        private const int InitialArraySize = 4;
+
         private T[] _array;
         private int _readIndex;
         private int _writeIndex;
 
+        private readonly Dictionary<ReallocationPolicy, IReallocationPolicy<T>> _reallocationStrategies = new() {
+            { ReallocationPolicy.NoReallocation, new NoReallocationPolicy<T>() },
+            { ReallocationPolicy.DynamicReallocation, new DynamicReallocationPolicy<T>() }
+        };
+
+        private readonly IReallocationPolicy<T> _reallocationPolicy;
+
         public uint Count { get; private set; }
 
-        public CircularArrayWithoutOverwrite(int capacity)
+        public CircularArrayWithoutOverwrite(
+            ReallocationPolicy reallocationPolicy = ReallocationPolicy.NoReallocation,
+            int capacity = InitialArraySize)
         {
             _array = new T[capacity];
+            _reallocationPolicy = _reallocationStrategies[reallocationPolicy];
         }
 
         public bool Add(T item)
         {
             if (IsBufferFull())
             {
-                return false;
+                if (!_reallocationPolicy.Reallocate(ref _array, ref _readIndex, ref _writeIndex, (int)Count))
+                {
+                    return false;
+                }
             }
 
             var writeIndex = GetWriteIndex();
@@ -31,16 +49,32 @@
             return true;
         }
 
-        public T? Get()
+        public bool TryGet(out T? value)
         {
             if (Count == 0)
-                return default;
+            {
+                value = default;
+                return false;
+            }
 
-            var item = _array[_readIndex];
+            value = _array[_readIndex];
             _readIndex = Increment(_readIndex);
             Count--;
 
-            return item;
+            return true;
+        }
+
+        public bool TryPeek(out T? value)
+        {
+            if (Count == 0)
+            {
+                value = default;
+                return false;
+            }
+
+            value = _array[_readIndex];
+
+            return true;
         }
 
         public void Clear()

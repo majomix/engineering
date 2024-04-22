@@ -8,13 +8,14 @@ namespace DataStructures.Queue
     {
         public enum QueueType
         {
-            DynamicArray,
+            CircularArray,
             CircularDoublyLinkedList
         }
 
         [Test]
+        [TestCase(QueueType.CircularArray)]
         [TestCase(QueueType.CircularDoublyLinkedList)]
-        public void Stack_EnqueueDequeuePeekCount(QueueType type)
+        public void Queue_EnqueueDequeuePeekCount(QueueType type)
         {
             // arrange
             var queue = CreateQueue(type);
@@ -45,13 +46,16 @@ namespace DataStructures.Queue
             queue.Dequeue().Should().Be(9);
 
             queue.Count.Should().Be(0);
-            queue.Peek().Should().Be(default);
-            queue.Dequeue().Should().Be(default);
+            var peekEmpty = () => queue.Peek();
+            peekEmpty.Should().Throw<InvalidOperationException>();
+            var popEmpty = () => queue.Dequeue();
+            popEmpty.Should().Throw<InvalidOperationException>();
         }
 
         [Test]
+        [TestCase(QueueType.CircularArray)]
         [TestCase(QueueType.CircularDoublyLinkedList)]
-        public void Stack_Enqueue_Clear_Count(QueueType type)
+        public void Queue_Enqueue_Clear_Count(QueueType type)
         {
             // arrange
             var stack = CreateQueue(type);
@@ -66,8 +70,9 @@ namespace DataStructures.Queue
         }
 
         [Test]
+        [TestCase(QueueType.CircularArray)]
         [TestCase(QueueType.CircularDoublyLinkedList)]
-        public void Stack_RepeatedEnqueueDequeue_Count(QueueType type)
+        public void Queue_RepeatedEnqueueDequeue_Count(QueueType type)
         {
             // arrange
             var stack = CreateQueue(type);
@@ -90,8 +95,8 @@ namespace DataStructures.Queue
         {
             switch (type)
             {
-                //case QueueType.DynamicArray:
-                //    return new CustomStackByDynamicArray<int>();
+                case QueueType.CircularArray:
+                    return new CustomQueueByCircularArray<int>();
                 case QueueType.CircularDoublyLinkedList:
                     return new CustomQueueByLinkedList<int>();
                 default:

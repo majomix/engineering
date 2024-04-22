@@ -17,12 +17,12 @@ namespace DataStructures.Stack
             Count++;
         }
 
-        public T? Pop()
+        public T Pop()
         {
             var tailNode = _linkedList.GetTail();
 
             if (tailNode == null)
-                return default;
+                throw new InvalidOperationException("Stack is empty.");
 
             _linkedList.RemoveNode(tailNode);
             Count--;
@@ -30,12 +30,12 @@ namespace DataStructures.Stack
             return tailNode.Value;
         }
 
-        public T? Peek()
+        public T Peek()
         {
             var tailNode = _linkedList.GetTail();
 
             if (tailNode == null)
-                return default;
+                throw new InvalidOperationException("Stack is empty.");
 
             return tailNode.Value;
         }

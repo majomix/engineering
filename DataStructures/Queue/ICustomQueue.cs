@@ -17,13 +17,13 @@
         /// Removes and returns the oldest item from the collection.
         /// </summary>
         /// <returns>Value of the oldest added item.</returns>
-        T? Dequeue();
+        T Dequeue();
 
         /// <summary>
         /// Returns but does not remove the oldest item from the collection.
         /// </summary>
         /// <returns>Value of the oldest added item.</returns>
-        T? Peek();
+        T Peek();
 
         /// <summary>
         /// Clears the whole queue.
