@@ -17,13 +17,13 @@
         /// Removes and returns the most recently added item from the collection.
         /// </summary>
         /// <returns>Value of the most recently added item.</returns>
-        T? Pop();
+        T Pop();
 
         /// <summary>
         /// Returns but does not remove the most recently added item from the collection.
         /// </summary>
         /// <returns>Value of the most recently added item.</returns>
-        T? Peek();
+        T Peek();
 
         /// <summary>
         /// Clears the whole stack.
