@@ -2,7 +2,12 @@
 
 namespace DataStructures.Deque
 {
-    internal class CustomDequeByLinkedList<T> : ICustomDeque<T>
+    /// <summary>
+    /// Deque implemented by circular doubly linked list.
+    /// The layout is:
+    /// [FRONT / LEFT / HEAD] ... [BACK / RIGHT / TAIL]
+    /// </summary>
+    public class CustomDequeByLinkedList<T> : ICustomDeque<T>
     {
         private readonly CustomCircularDoublyLinkedList<T> _linkedList = new();
 

@@ -4,7 +4,6 @@
     {
         public bool Reallocate(ref T[] array, ref int readIndex, ref int writeIndex, int count)
         {
-            // when casting positive fractional values, they are rounded down
             var newSize = array.Length * 2;
 
             // copy content

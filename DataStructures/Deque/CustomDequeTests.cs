@@ -6,11 +6,19 @@ namespace DataStructures.Deque
     [TestFixture]
     internal class CustomDequeTests
     {
+        public enum DequeType
+        {
+            CircularArray,
+            CircularDoublyLinkedList
+        }
+
         [Test]
-        public void Deque_PushBack_PopBack()
+        [TestCase(DequeType.CircularArray)]
+        [TestCase(DequeType.CircularDoublyLinkedList)]
+        public void Deque_PushBack_PopBack(DequeType type)
         {
             // arrange
-            var deque = new CustomDequeByLinkedList<int>();
+            var deque = CreateDeque(type);
 
             // act
             deque.PushBack(1);
@@ -26,10 +34,12 @@ namespace DataStructures.Deque
         }
 
         [Test]
-        public void Deque_PushBack_PopFront()
+        [TestCase(DequeType.CircularArray)]
+        [TestCase(DequeType.CircularDoublyLinkedList)]
+        public void Deque_PushBack_PopFront(DequeType type)
         {
             // arrange
-            var deque = new CustomDequeByLinkedList<int>();
+            var deque = CreateDeque(type);
 
             // act
             deque.PushBack(1);
@@ -45,10 +55,12 @@ namespace DataStructures.Deque
         }
 
         [Test]
-        public void Deque_PushFront_PopBack()
+        [TestCase(DequeType.CircularArray)]
+        [TestCase(DequeType.CircularDoublyLinkedList)]
+        public void Deque_PushFront_PopBack(DequeType type)
         {
             // arrange
-            var deque = new CustomDequeByLinkedList<int>();
+            var deque = CreateDeque(type);
 
             // act
             deque.PushFront(1);
@@ -64,10 +76,12 @@ namespace DataStructures.Deque
         }
 
         [Test]
-        public void Deque_PushFront_PopFront()
+        [TestCase(DequeType.CircularArray)]
+        [TestCase(DequeType.CircularDoublyLinkedList)]
+        public void Deque_PushFront_PopFront(DequeType type)
         {
             // arrange
-            var deque = new CustomDequeByLinkedList<int>();
+            var deque = CreateDeque(type);
 
             // act
             deque.PushFront(1);
@@ -82,11 +96,64 @@ namespace DataStructures.Deque
             deque.Count.Should().Be(0);
         }
 
+
         [Test]
-        public void Deque_PushFrontBack_PopFront()
+        public void Deque_CircularArray_ReallocationNoWrap()
         {
             // arrange
-            var deque = new CustomDequeByLinkedList<int>();
+            var deque = new CustomDequeByCircularArray<int>();
+            deque.PushBack(1);
+            deque.PushBack(2);
+            deque.PushBack(3);
+            deque.PushBack(4);
+
+            // act
+            deque.PushBack(5);
+
+            // assert
+            deque.Count.Should().Be(5);
+            deque.PopBack().Should().Be(5);
+            deque.PopBack().Should().Be(4);
+            deque.PopBack().Should().Be(3);
+            deque.PopBack().Should().Be(2);
+            deque.PopBack().Should().Be(1);
+            deque.Count.Should().Be(0);
+        }
+
+        [Test]
+        public void Deque_CircularArray_ReallocationWrap()
+        {
+            // arrange
+            var deque = new CustomDequeByCircularArray<int>();
+            deque.PushBack(1);
+            deque.PushBack(2);
+            deque.PushBack(3);
+            deque.PushBack(4);
+            deque.PopFront();
+            deque.PopFront();
+            deque.PushBack(5);
+            deque.PushBack(6);
+
+            // act
+            deque.PushBack(7);
+
+            // assert
+            deque.Count.Should().Be(5);
+            deque.PopBack().Should().Be(7);
+            deque.PopBack().Should().Be(6);
+            deque.PopBack().Should().Be(5);
+            deque.PopBack().Should().Be(4);
+            deque.PopBack().Should().Be(3);
+            deque.Count.Should().Be(0);
+        }
+
+        [Test]
+        [TestCase(DequeType.CircularArray)]
+        [TestCase(DequeType.CircularDoublyLinkedList)]
+        public void Deque_PushFrontBack_PopFront(DequeType type)
+        {
+            // arrange
+            var deque = CreateDeque(type);
 
             // act
             deque.PushFront(1);
@@ -112,10 +179,12 @@ namespace DataStructures.Deque
         }
 
         [Test]
-        public void Deque_PushFrontBack_PopBack()
+        [TestCase(DequeType.CircularArray)]
+        [TestCase(DequeType.CircularDoublyLinkedList)]
+        public void Deque_PushFrontBack_PopBack(DequeType type)
         {
             // arrange
-            var deque = new CustomDequeByLinkedList<int>();
+            var deque = CreateDeque(type);
 
             // act
             deque.PushFront(1);
@@ -138,6 +207,19 @@ namespace DataStructures.Deque
             deque.PopBack().Should().Be(5);
             deque.PopBack().Should().Be(6);
             deque.Count.Should().Be(0);
+        }
+
+        private ICustomDeque<int> CreateDeque(DequeType type)
+        {
+            switch (type)
+            {
+                case DequeType.CircularArray:
+                    return new CustomDequeByCircularArray<int>();
+                case DequeType.CircularDoublyLinkedList:
+                    return new CustomDequeByLinkedList<int>();
+                default:
+                    throw new ArgumentException("unexpected type");
+            }
         }
     }
 }
