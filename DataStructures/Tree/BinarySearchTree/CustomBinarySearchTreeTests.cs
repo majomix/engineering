@@ -295,14 +295,170 @@ namespace DataStructures.Tree.BinarySearchTree
             var nonExistentNode = bst.Search(99);
 
             // assert
-            twoNode!.Value.Should().Be(2);
-            fourNode!.Value.Should().Be(4);
-            sixNode!.Value.Should().Be(6);
-            oneNode!.Value.Should().Be(1);
-            threeNode!.Value.Should().Be(3);
-            fiveNode!.Value.Should().Be(5);
-            zeroNode!.Value.Should().Be(0);
-            nonExistentNode.Should().BeNull();
+            twoNode.Result!.Value.Should().Be(2);
+            fourNode.Result!.Value.Should().Be(4);
+            sixNode.Result!.Value.Should().Be(6);
+            oneNode.Result!.Value.Should().Be(1);
+            threeNode.Result!.Value.Should().Be(3);
+            fiveNode.Result!.Value.Should().Be(5);
+            zeroNode.Result!.Value.Should().Be(0);
+            nonExistentNode.Result.Should().BeNull();
+        }
+
+        [Test]
+        public void BinarySearchTree_InsertNodes_RemoveLeafNodesUpToRoot()
+        {
+            // arrange
+            //        2
+            //       / \
+            //      1   4
+            //     /   / \
+            //    0   3   6
+            //           /
+            //          5 
+            var bst = new CustomBinarySearchTree<int>();
+            bst.Insert(2);
+            bst.Insert(4);
+            bst.Insert(6);
+            bst.Insert(1);
+            bst.Insert(3);
+            bst.Insert(5);
+            bst.Insert(0);
+
+            // act
+            //    1
+            //   /
+            //  0
+            bst.Remove(5);
+            bst.Remove(3);
+            bst.Remove(6);
+            bst.Remove(4);
+            bst.Remove(2);
+            var root = bst.GetRoot()!;
+
+            // assert
+            root.Value.Should().Be(1);
+            root.Left!.Value.Should().Be(0);
+        }
+
+        [Test]
+        public void BinarySearchTree_InsertNodes_RemoveNodesWithOneSubtree()
+        {
+            // arrange
+            //        2
+            //       / \
+            //      1   3
+            //     /     \
+            //    0       4
+            var bst = new CustomBinarySearchTree<int>();
+            bst.Insert(2);
+            bst.Insert(3);
+            bst.Insert(4);
+            bst.Insert(1);
+            bst.Insert(0);
+
+            // act
+            //    2
+            //   / \
+            //  0   4
+            bst.Remove(3);
+            bst.Remove(1);
+            var root = bst.GetRoot()!;
+
+            // assert
+            root.Value.Should().Be(2);
+            root.Left!.Value.Should().Be(0);
+            root.Left!.Left.Should().BeNull();
+            root.Left!.Right.Should().BeNull();
+
+            root.Right!.Value.Should().Be(4);
+            root.Right!.Left.Should().BeNull();
+            root.Right!.Right.Should().BeNull();
+        }
+
+        [Test]
+        public void BinarySearchTree_InsertNodes_RemoveNonExistentNode()
+        {
+            // arrange
+            //    2
+            //   / \
+            //  1   3
+            var bst = new CustomBinarySearchTree<int>();
+            bst.Insert(2);
+            bst.Insert(3);
+            bst.Insert(1);
+
+            // act
+            var removeResult = bst.Remove(0);
+            var root = bst.GetRoot()!;
+
+            // assert
+            removeResult.Should().BeFalse();
+            root.Value.Should().Be(2);
+            root.Left!.Value.Should().Be(1);
+            root.Left!.Left.Should().BeNull();
+            root.Left!.Right.Should().BeNull();
+
+            root.Right!.Value.Should().Be(3);
+            root.Right!.Left.Should().BeNull();
+            root.Right!.Right.Should().BeNull();
+        }
+
+        [Test]
+        public void BinarySearchTree_InsertNodes_RemoveRootWithTwoSubtrees()
+        {
+            // arrange
+            //        4
+            //       / \
+            //      1   5
+            //     / \   \
+            //    0   3   6
+            //       /
+            //      2
+            var bst = new CustomBinarySearchTree<int>();
+            bst.Insert(4);
+            bst.Insert(5);
+            bst.Insert(6);
+            bst.Insert(1);
+            bst.Insert(3);
+            bst.Insert(2);
+            bst.Insert(0);
+
+            // act
+            //        3
+            //       / \
+            //      1   5
+            //     / \   \
+            //    0   2   6
+            bst.Remove(4);
+            var root = bst.GetRoot()!;
+
+            // assert
+            // root
+            root.Value.Should().Be(3);
+
+            // depth 1
+            var nodeOne = root.Left!;
+            var nodeFive = root.Right!;
+            nodeOne.Value.Should().Be(1);
+            nodeFive.Value.Should().Be(5);
+
+            // depth 2
+            var nodeZero = nodeOne.Left!;
+            var nodeTwo = nodeOne.Right!;
+            nodeZero.Value.Should().Be(0);
+            nodeTwo.Value.Should().Be(2);
+
+            var nodeSix = nodeFive.Right!;
+            nodeSix.Value.Should().Be(6);
+
+            // depth 3
+            nodeZero.Left.Should().BeNull();
+            nodeZero.Right.Should().BeNull();
+            nodeTwo.Left.Should().BeNull();
+            nodeTwo.Right.Should().BeNull();
+            nodeSix.Left.Should().BeNull();
+            nodeSix.Right.Should().BeNull();
         }
     }
 }

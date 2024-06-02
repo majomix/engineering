@@ -12,13 +12,14 @@
         /// Remove item from binary search tree.
         /// </summary>
         /// <param name="item">Item to remove.</param>
-        void Remove(T item);
+        /// <returns>True if removed, false if not found.</returns>
+        bool Remove(T item);
 
         /// <summary>
         /// Search for an item in binary search tree.
         /// </summary>
         /// <param name="item">Item to search.</param>
         /// <returns>Corresponding node or null if not found.</returns>
-        BinaryTreeNode<T>? Search(T item);
+        BinaryTreeSearchResult<T>? Search(T item);
     }
 }
