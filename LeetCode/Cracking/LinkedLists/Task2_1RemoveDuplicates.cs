@@ -70,7 +70,7 @@ namespace LeetCode.Cracking.LinkedLists
         {
             // arrange
             var sut = new Task2_1RemoveDuplicates();
-            var linkedList = CreateLinkedListWithDuplicates();
+            var linkedList = CrackingLinkedListProvider.CreateLinkedListWithDuplicates();
 
             // act
             sut.RemoveDuplicates(linkedList);
@@ -89,7 +89,7 @@ namespace LeetCode.Cracking.LinkedLists
         {
             // arrange
             var sut = new Task2_1RemoveDuplicates();
-            var linkedList = CreateLinkedListWithDuplicates();
+            var linkedList = CrackingLinkedListProvider.CreateLinkedListWithDuplicates();
 
             // act
             sut.RemoveDuplicatesNoDataStructure(linkedList);
@@ -101,16 +101,6 @@ namespace LeetCode.Cracking.LinkedLists
             linkedList.Next.Next.Next.Data.Should().Be(4);
             linkedList.Next.Next.Next.Next.Data.Should().Be(5);
             linkedList.Next.Next.Next.Next.Next.Should().BeNull();
-        }
-
-        private CrackingLinkedListNode CreateLinkedListWithDuplicates()
-        {
-            return new CrackingLinkedListNode(1,
-                new CrackingLinkedListNode(2,
-                    new CrackingLinkedListNode(2,
-                        new CrackingLinkedListNode(3,
-                            new CrackingLinkedListNode(4,
-                                new CrackingLinkedListNode(5, new CrackingLinkedListNode(5), null), null), null), null), null), null);
         }
     }
 }
