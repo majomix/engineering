@@ -84,6 +84,11 @@ namespace LeetCode.Cracking.ArraysAndStrings
 
             return matrix;
         }
+
+        public int[,] RotateMatrixInPlaceThroughMirroring(int[,] matrix)
+        {
+            return null;
+        }
     }
 
     [TestFixture]
