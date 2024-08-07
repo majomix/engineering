@@ -1,0 +1,18 @@
+﻿namespace DataStructures.Heap
+{
+    internal class CustomMinHeapByDynamicArray<TKey, TValue> : AbstractHeapByDynamicArray<TKey, TValue>, ICustomMinHeap<TKey, TValue> where TKey : IComparable<TKey>
+    {
+        public CustomMinHeapByDynamicArray(uint capacity = InitialArraySize) : base(capacity) { }
+
+        public TValue ExtractMin()
+        {
+            return ExtractRoot();
+        }
+
+        protected override bool NodesBreaksHeapProperty(TKey leftKey, TKey rightKey)
+        {
+            var comparer = Comparer<TKey>.Default;
+            return comparer.Compare(leftKey, rightKey) > 0;
+        }
+    }
+}
