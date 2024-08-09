@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace DataStructures.Tree.BinarySearchTree
 {
+    /// <summary>
+    /// Custom implementation of binary search tree.
+    /// </summary>
     public class CustomBinarySearchTree<T> : IBinarySearchTree<T>, IEnumerable<T>
     {
         private BinaryTreeNode<T>? _root;

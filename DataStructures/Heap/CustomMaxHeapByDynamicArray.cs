@@ -4,6 +4,11 @@
     {
         public CustomMaxHeapByDynamicArray(uint capacity = InitialArraySize) : base(capacity) { }
 
+        public TValue PeekMax()
+        {
+            return PeekRoot();
+        }
+
         public TValue ExtractMax()
         {
             return ExtractRoot();

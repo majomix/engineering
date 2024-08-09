@@ -7,7 +7,7 @@ namespace DataStructures.Heap
     internal class CustomMaxHeapByDynamicArrayTests
     {
         [Test]
-        public void MinHeap_Insert_ExtractMin()
+        public void MaxHeap_Insert_ExtractMax()
         {
             // arrange
             var heap = new CustomMaxHeapByDynamicArray<int, int>();
@@ -24,6 +24,7 @@ namespace DataStructures.Heap
             heap.Insert(5, 5);
 
             // assert
+            heap.PeekMax().Should().Be(9);
             heap.ExtractMax().Should().Be(9);
             heap.ExtractMax().Should().Be(8);
             heap.ExtractMax().Should().Be(7);
@@ -38,7 +39,7 @@ namespace DataStructures.Heap
         }
 
         [Test]
-        public void MinHeap_Insert_Clear()
+        public void MaxHeap_Insert_Clear()
         {
             // arrange
             var heap = new CustomMaxHeapByDynamicArray<int, int>();
@@ -55,7 +56,7 @@ namespace DataStructures.Heap
         }
 
         [Test]
-        public void MinHeap_BuildHeap()
+        public void MaxHeap_BuildHeap()
         {
             // arrange
             var list = new[] { 7, 9, 8, 4, 3, 1, 2, 5, 6 };
@@ -65,6 +66,7 @@ namespace DataStructures.Heap
             heap.BuildHeap(list, value => value);
 
             // assert
+            heap.PeekMax().Should().Be(9);
             heap.ExtractMax().Should().Be(9);
             heap.ExtractMax().Should().Be(8);
             heap.ExtractMax().Should().Be(7);

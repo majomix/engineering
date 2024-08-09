@@ -10,6 +10,12 @@
         void Insert(TKey key, TValue value);
 
         /// <summary>
+        /// Returns the maximum element from the heap without removing it.
+        /// </summary>
+        /// <returns>Minimum element.</returns>
+        TValue PeekMax();
+
+        /// <summary>
         /// Extracts the maximum element from the heap.
         /// </summary>
         /// <returns>Maximum element.</returns>

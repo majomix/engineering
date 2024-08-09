@@ -33,7 +33,7 @@
         /// Removes an element node from the linked list in linear time.
         /// </summary>
         /// <param name="node">Item node to remove.</param>
-        /// <returns><see langword="true" /> if successful, <see langword="false" />otherwise.</returns>
+        /// <returns><see langword="true" /> if successful, <see langword="false" /> otherwise.</returns>
         bool Remove(SinglyLinkedListNode<T> node);
 
         /// <summary>

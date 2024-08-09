@@ -24,6 +24,7 @@ namespace DataStructures.Heap
             heap.Insert(5, 5);
 
             // assert
+            heap.PeekMin().Should().Be(1);
             heap.ExtractMin().Should().Be(1);
             heap.ExtractMin().Should().Be(2);
             heap.ExtractMin().Should().Be(3);
@@ -65,6 +66,7 @@ namespace DataStructures.Heap
             heap.BuildHeap(list, value => value);
 
             // assert
+            heap.PeekMin().Should().Be(1);
             heap.ExtractMin().Should().Be(1);
             heap.ExtractMin().Should().Be(2);
             heap.ExtractMin().Should().Be(3);

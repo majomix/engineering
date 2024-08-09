@@ -4,6 +4,11 @@
     {
         public CustomMinHeapByDynamicArray(uint capacity = InitialArraySize) : base(capacity) { }
 
+        public TValue PeekMin()
+        {
+            return PeekRoot();
+        }
+
         public TValue ExtractMin()
         {
             return ExtractRoot();

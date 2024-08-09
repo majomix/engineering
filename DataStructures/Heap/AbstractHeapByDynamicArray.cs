@@ -24,6 +24,14 @@ namespace DataStructures.Heap
             SiftUp(indexOfNewItem);
         }
 
+        public TValue PeekRoot()
+        {
+            if (_array.Count == 1)
+                throw new InvalidOperationException("Heap is empty.");
+
+            return _array[IndexOfFirstItem].Value!;
+        }
+
         public TValue ExtractRoot()
         {
             if (_array.Count == 1)

@@ -10,6 +10,12 @@
         void Insert(TKey key, TValue value);
 
         /// <summary>
+        /// Returns the minimum element from the heap without removing it.
+        /// </summary>
+        /// <returns>Minimum element.</returns>
+        TValue PeekMin();
+
+        /// <summary>
         /// Extracts the minimum element from the heap.
         /// </summary>
         /// <returns>Minimum element.</returns>
