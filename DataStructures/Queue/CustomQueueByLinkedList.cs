@@ -5,7 +5,7 @@ namespace DataStructures.Queue
     /// <summary>
     /// Custom implementation of First In First Out collection.
     /// </summary>
-    internal class CustomQueueByLinkedList<T> : ICustomQueue<T>
+    public class CustomQueueByLinkedList<T> : ICustomQueue<T>
     {
         private readonly CustomCircularDoublyLinkedList<T> _linkedList = new();
 

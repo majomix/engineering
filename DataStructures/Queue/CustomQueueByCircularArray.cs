@@ -3,7 +3,7 @@ using DataStructures.Helpers;
 
 namespace DataStructures.Queue
 {
-    internal class CustomQueueByCircularArray<T> : ICustomQueue<T>
+    public class CustomQueueByCircularArray<T> : ICustomQueue<T>
     {
         private readonly CircularArrayWithoutOverwrite<T> _array;
         private const int InitialArraySize = 4;

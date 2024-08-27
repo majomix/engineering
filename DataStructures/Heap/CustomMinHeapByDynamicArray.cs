@@ -1,6 +1,6 @@
 ﻿namespace DataStructures.Heap
 {
-    internal class CustomMinHeapByDynamicArray<TKey, TValue> : AbstractHeapByDynamicArray<TKey, TValue>, ICustomMinHeap<TKey, TValue> where TKey : IComparable<TKey>
+    public class CustomMinHeapByDynamicArray<TKey, TValue> : AbstractHeapByDynamicArray<TKey, TValue>, ICustomMinHeap<TKey, TValue> where TKey : IComparable<TKey>
     {
         public CustomMinHeapByDynamicArray(uint capacity = InitialArraySize) : base(capacity) { }
 

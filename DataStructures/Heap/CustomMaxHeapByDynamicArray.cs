@@ -1,6 +1,6 @@
 ﻿namespace DataStructures.Heap
 {
-    internal class CustomMaxHeapByDynamicArray<TKey, TValue> : AbstractHeapByDynamicArray<TKey, TValue>, ICustomMaxHeap<TKey, TValue> where TKey : IComparable<TKey>
+    public class CustomMaxHeapByDynamicArray<TKey, TValue> : AbstractHeapByDynamicArray<TKey, TValue>, ICustomMaxHeap<TKey, TValue> where TKey : IComparable<TKey>
     {
         public CustomMaxHeapByDynamicArray(uint capacity = InitialArraySize) : base(capacity) { }
 
