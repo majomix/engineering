@@ -15,19 +15,20 @@ namespace Algorithms.Sort
             QuickSort,
             MergeSort,
             HeapSort,
-            CountingSort
+            CountingSort,
+            RadixSort
         }
 
         private static object[] testCases =
         {
-            //new object[] { SortingAlgorithm.SelectionSort },
-            //new object[] { SortingAlgorithm.InsertionSort },
-            //new object[] { SortingAlgorithm.BubbleSort },
-            //new object[] { SortingAlgorithm.ShellSort },
-            //new object[] { SortingAlgorithm.QuickSort },
-            //new object[] { SortingAlgorithm.MergeSort },
-            //new object[] { SortingAlgorithm.HeapSort },
-            new object[] { SortingAlgorithm.CountingSort }
+            new object[] { SortingAlgorithm.SelectionSort },
+            new object[] { SortingAlgorithm.InsertionSort },
+            new object[] { SortingAlgorithm.BubbleSort },
+            new object[] { SortingAlgorithm.ShellSort },
+            new object[] { SortingAlgorithm.QuickSort },
+            new object[] { SortingAlgorithm.MergeSort },
+            new object[] { SortingAlgorithm.HeapSort },
+            new object[] { SortingAlgorithm.CountingSort },
         };
 
         [TestCaseSource(nameof(testCases))]
@@ -72,6 +73,20 @@ namespace Algorithms.Sort
             result.Should().BeInAscendingOrder();
         }
 
+        [TestCase(SortingAlgorithm.RadixSort)]
+        public void RadixSortTest(SortingAlgorithm algorithm)
+        {
+            // arrange
+            var sut = CreateSut(algorithm);
+            var input = new[] { 329, 457, 657, 59, 53, 4, 8, 1789, 1256 };
+
+            // act
+            var result = sut.Sort(input, i => i);
+
+            // assert
+            result.Should().BeInAscendingOrder();
+        }
+
         private ISortingAlgorithm<int, int> CreateSut(SortingAlgorithm algorithm)
         {
             switch (algorithm)
@@ -92,6 +107,8 @@ namespace Algorithms.Sort
                     return new HeapSortAlgorithm<int, int>();
                 case SortingAlgorithm.CountingSort:
                     return new CountingSortAlgorithm<int>();
+                case SortingAlgorithm.RadixSort:
+                    return new RadixSortAlgorithm<int>();
                 default:
                     throw new NotImplementedException("Algorithm not implemented.");
             }
