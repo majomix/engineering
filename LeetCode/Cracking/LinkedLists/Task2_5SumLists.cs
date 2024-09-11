@@ -6,7 +6,7 @@ namespace LeetCode.Cracking.LinkedLists
     /// <summary>
     /// You have two numbers represented by a linked list where each node contains a single digit.
     /// The digits are stored in reverse order, such that the 1's digit is at the head of the list.
-    /// Write a function trhat adds two numbers and returns the sum as a linked list.
+    /// Write a function that adds two numbers and returns the sum as a linked list.
     /// You are not allowed to cheat and just convert the linked list to an integer.
     ///
     /// Example:

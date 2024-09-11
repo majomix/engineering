@@ -50,7 +50,7 @@ namespace LeetCode.Cracking.LinkedLists
     public class Task2_4PartitionTests
     {
         [Test]
-        public void RemoveDuplicatesTest()
+        public void PartitionTest()
         {
             // arrange
             var sut = new Task2_4Partition();

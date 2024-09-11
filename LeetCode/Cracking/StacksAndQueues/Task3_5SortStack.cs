@@ -5,7 +5,7 @@ namespace LeetCode.Cracking.StacksAndQueues
 {
     /// <summary>
     /// Sort a stack such that the smallest items are on the top.
-    /// You can use an additional temporary, but you may not copy the elements into any other data structure.
+    /// You can use an additional temporary stack, but you may not copy the elements into any other data structure.
     /// The stack supports push, pop, peek and isEmpty.
     ///
     /// Discussion:

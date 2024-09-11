@@ -8,7 +8,9 @@ namespace LeetCode.Cracking.TreesAndGraphs
     /// <summary>
     /// Given a directed graph and two nodes (S and E), design an algorithm to find whether there is a route from S to E.
     ///
-    /// Discussion:
+    /// Solutions:
+    /// * depth-first
+    /// * breadth-first
     /// </summary>
     internal class Task4_1RouteBetweenNodes
     {
