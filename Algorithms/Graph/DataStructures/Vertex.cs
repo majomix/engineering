@@ -6,6 +6,6 @@
 
         public VertexState State { get; set; }
 
-        public List<int> Adjacency { get; set; } = new();
+        public List<Edge> Adjacency { get; set; } = new();
     }
 }

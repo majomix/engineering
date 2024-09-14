@@ -10,15 +10,22 @@
 
             foreach (var neighbor in neighborVertices)
             {
-                vertex.Adjacency.Add(neighbor);
+                vertex.Adjacency.Add(new Edge { TargetVertexId = neighbor });
             }
 
             Vertices[vertexId] = vertex;
         }
 
-        public Vertex GetRoot()
+        public void AddVertex(int vertexId, (int VertexId, int Weight)[] neighborVertices)
         {
-            return Vertices[0];
+            var vertex = new Vertex { Id = vertexId, State = VertexState.Unvisited };
+
+            foreach (var neighbor in neighborVertices)
+            {
+                vertex.Adjacency.Add(new Edge { TargetVertexId = neighbor.VertexId, Weight = neighbor.Weight });
+            }
+
+            Vertices[vertexId] = vertex;
         }
     }
 }

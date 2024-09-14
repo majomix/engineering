@@ -4,48 +4,52 @@ namespace DataStructures.Heap
 {
     public abstract class AbstractHeapByDynamicArray<TKey, TValue> where TKey : IComparable<TKey>
     {
-        private const int IndexOfFirstItem = 1;
         private readonly HeapNode<TKey, TValue> _dummyNode = new();
-        private readonly CustomDynamicArray<HeapNode<TKey, TValue>> _array;
 
+        protected const uint IndexOfDummyItem = 0;
+        protected const uint IndexOfFirstItem = 1;
+        
+        protected readonly CustomDynamicArray<HeapNode<TKey, TValue>> Array;
         protected const int InitialArraySize = 4;
 
         protected AbstractHeapByDynamicArray(uint capacity)
         {
-            _array = new CustomDynamicArray<HeapNode<TKey, TValue>>(capacity) { _dummyNode };
+            Array = new CustomDynamicArray<HeapNode<TKey, TValue>>(capacity) { _dummyNode };
         }
+
+        public uint Count => Array.Count - IndexOfFirstItem;
 
         public void Insert(TKey key, TValue value)
         {
             var heapNodeToInsert = new HeapNode<TKey, TValue> { Key = key, Value = value };
-            _array.Add(heapNodeToInsert);
+            Array.Add(heapNodeToInsert);
 
-            var indexOfNewItem = _array.Count - 1;
+            var indexOfNewItem = Array.Count - 1;
             SiftUp(indexOfNewItem);
         }
 
         public TValue PeekRoot()
         {
-            if (_array.Count == 1)
+            if (Array.Count == 1)
                 throw new InvalidOperationException("Heap is empty.");
 
-            return _array[IndexOfFirstItem].Value!;
+            return Array[IndexOfFirstItem].Value!;
         }
 
         public TValue ExtractRoot()
         {
-            if (_array.Count == 1)
+            if (Array.Count == 1)
                 throw new InvalidOperationException("Heap is empty.");
 
-            var topElement = _array[IndexOfFirstItem];
+            var topElement = Array[IndexOfFirstItem];
 
-            var indexOfLastElement = _array.Count - 1;
-            var lastElement = _array[indexOfLastElement];
-            _array.RemoveAt(indexOfLastElement);
+            var indexOfLastElement = Array.Count - 1;
+            var lastElement = Array[indexOfLastElement];
+            Array.RemoveAt(indexOfLastElement);
 
             if (indexOfLastElement != IndexOfFirstItem)
             {
-                _array[IndexOfFirstItem] = lastElement;
+                Array[IndexOfFirstItem] = lastElement;
                 SiftDown(IndexOfFirstItem);
             }
 
@@ -56,7 +60,7 @@ namespace DataStructures.Heap
         {
             foreach (var item in items)
             {
-                _array.Add(new HeapNode<TKey, TValue> { Key = keySelector(item), Value = item });
+                Array.Add(new HeapNode<TKey, TValue> { Key = keySelector(item), Value = item });
             }
 
             var itemsToSiftDown = (uint)items.Length / 2;
@@ -68,47 +72,61 @@ namespace DataStructures.Heap
 
         public void Clear()
         {
-            _array.Clear();
-            _array.Add(_dummyNode);
+            Array.Clear();
+            Array.Add(_dummyNode);
         }
 
         protected abstract bool NodesBreaksHeapProperty(TKey leftKey, TKey rightKey);
 
-        private void SiftUp(uint indexToSiftUp)
+        protected void SiftUp(uint indexToSiftUp)
         {
-            var heapNodeToBubbleUp = _array[indexToSiftUp];
+            var heapNodeToBubbleUp = Array[indexToSiftUp];
             var parentIndex = GetParentIndex(indexToSiftUp);
 
-            while (indexToSiftUp > IndexOfFirstItem && NodesBreaksHeapProperty(_array[parentIndex].Key!, heapNodeToBubbleUp.Key!))
+            while (indexToSiftUp > IndexOfFirstItem && NodesBreaksHeapProperty(Array[parentIndex].Key!, heapNodeToBubbleUp.Key!))
             {
-                _array[indexToSiftUp] = _array[parentIndex];
+                Array[indexToSiftUp] = Array[parentIndex];
                 indexToSiftUp = parentIndex;
                 parentIndex = GetParentIndex(indexToSiftUp);
             }
 
-            _array[indexToSiftUp] = heapNodeToBubbleUp;
+            Array[indexToSiftUp] = heapNodeToBubbleUp;
         }
 
-
-        private void SiftDown(uint indexToSiftDown)
+        protected void SiftDown(uint indexToSiftDown)
         {
             var leftChildIndex = GetLeftChildIndex(indexToSiftDown);
             var rightChildIndex = GetRightChildIndex(indexToSiftDown);
 
-            if (_array.Count <= leftChildIndex)
+            if (Array.Count <= leftChildIndex)
                 return;
 
             var childIndexFulfillingHeapProperty = leftChildIndex;
-            if (_array.Count > rightChildIndex && NodesBreaksHeapProperty(_array[leftChildIndex].Key!, _array[rightChildIndex].Key!))
+            if (Array.Count > rightChildIndex && NodesBreaksHeapProperty(Array[leftChildIndex].Key!, Array[rightChildIndex].Key!))
             {
                 childIndexFulfillingHeapProperty = rightChildIndex;
             }
 
-            if (NodesBreaksHeapProperty(_array[indexToSiftDown].Key!, _array[childIndexFulfillingHeapProperty].Key!))
+            if (NodesBreaksHeapProperty(Array[indexToSiftDown].Key!, Array[childIndexFulfillingHeapProperty].Key!))
             {
                 SwapElements(indexToSiftDown, childIndexFulfillingHeapProperty);
                 SiftDown(childIndexFulfillingHeapProperty);
             }
+        }
+
+        protected uint FindValueIndex(TValue value)
+        {
+            var comparer = EqualityComparer<TValue>.Default;
+
+            for (uint i = 0; i < Array.Count; i++)
+            {
+                if (comparer.Equals(Array[i].Value, value))
+                {
+                    return i;
+                }
+            }
+
+            return IndexOfDummyItem;
         }
 
         private uint GetParentIndex(uint index)
@@ -129,7 +147,7 @@ namespace DataStructures.Heap
 
         private void SwapElements(uint left, uint right)
         {
-            (_array[left], _array[right]) = (_array[right], _array[left]);
+            (Array[left], Array[right]) = (Array[right], Array[left]);
         }
     }
 }

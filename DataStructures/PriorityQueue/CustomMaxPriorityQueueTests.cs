@@ -34,7 +34,7 @@ namespace DataStructures.PriorityQueue
             priorityQueue.Insert(5, 5);
 
             // assert
-            priorityQueue.GetMaximum().Should().Be(9);
+            priorityQueue.PeekMaximum().Should().Be(9);
             priorityQueue.ExtractMaximum().Should().Be(9);
             priorityQueue.ExtractMaximum().Should().Be(8);
             priorityQueue.ExtractMaximum().Should().Be(7);

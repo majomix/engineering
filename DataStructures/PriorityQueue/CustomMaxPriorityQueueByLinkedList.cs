@@ -5,7 +5,7 @@ namespace DataStructures.PriorityQueue
     /// <summary>
     /// Custom implementation of priority queue (priority given to the largest keys) by linked list.
     /// </summary>
-    internal class CustomMaxPriorityQueueByLinkedList<TKey, TValue> : IMaxPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
+    public class CustomMaxPriorityQueueByLinkedList<TKey, TValue> : IMaxPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
     {
         private readonly CustomSinglyLinkedList<PriorityItem<TKey, TValue>> _linkedList = new();
 
@@ -40,7 +40,7 @@ namespace DataStructures.PriorityQueue
             return comparer.Compare(left, right) > 0;
         }
 
-        public TValue GetMaximum()
+        public TValue PeekMaximum()
         {
             var head = _linkedList.GetHead();
             if (head == null)
@@ -59,5 +59,7 @@ namespace DataStructures.PriorityQueue
 
             return head.Value.Value!;
         }
+
+        public uint Count => (uint)_linkedList.Count();
     }
 }

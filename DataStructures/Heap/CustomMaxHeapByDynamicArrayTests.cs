@@ -79,5 +79,56 @@ namespace DataStructures.Heap
             var extractMinEmpty = () => heap.ExtractMax();
             extractMinEmpty.Should().Throw<InvalidOperationException>();
         }
+
+        [Test]
+        public void MaxHeap_IncreaseKey()
+        {
+            // arrange
+            var heap = new CustomMaxHeapByDynamicArray<int, int>();
+            heap.Insert(1, 5);
+            heap.Insert(2, 6);
+            heap.Insert(3, 7);
+            heap.Insert(4, 8);
+
+            // act
+            heap.IncreaseKey(5, 10);
+
+            // assert
+            heap.PeekMax().Should().Be(5);
+        }
+
+        [Test]
+        public void MaxHeap_IncreaseKey_ThrowsIfKeyIsSmaller()
+        {
+            // arrange
+            var heap = new CustomMaxHeapByDynamicArray<int, int>();
+            heap.Insert(1, 5);
+            heap.Insert(2, 6);
+            heap.Insert(3, 7);
+            heap.Insert(4, 8);
+
+            // act
+            var increaseKey = () => heap.IncreaseKey(5, 0);
+
+            // assert
+            increaseKey.Should().Throw<InvalidOperationException>();
+        }
+
+        [Test]
+        public void MaxHeap_IncreaseKey_ThrowsIfValueNotFound()
+        {
+            // arrange
+            var heap = new CustomMaxHeapByDynamicArray<int, int>();
+            heap.Insert(1, 5);
+            heap.Insert(2, 6);
+            heap.Insert(3, 7);
+            heap.Insert(4, 8);
+
+            // act
+            var increaseKey = () => heap.IncreaseKey(10, 0);
+
+            // assert
+            increaseKey.Should().Throw<InvalidOperationException>();
+        }
     }
 }

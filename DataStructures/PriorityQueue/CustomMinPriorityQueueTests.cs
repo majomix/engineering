@@ -34,7 +34,7 @@ namespace DataStructures.PriorityQueue
             priorityQueue.Insert(5, 5);
 
             // assert
-            priorityQueue.GetMinimum().Should().Be(1);
+            priorityQueue.PeekMinimum().Should().Be(1);
             priorityQueue.ExtractMinimum().Should().Be(1);
             priorityQueue.ExtractMinimum().Should().Be(2);
             priorityQueue.ExtractMinimum().Should().Be(3);

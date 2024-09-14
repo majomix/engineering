@@ -5,7 +5,7 @@ namespace DataStructures.PriorityQueue
     /// <summary>
     /// Custom implementation of priority queue (priority given to the smallest keys) by linked list.
     /// </summary>
-    internal class CustomMinPriorityQueueByLinkedList<TKey, TValue> : IMinPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
+    public class CustomMinPriorityQueueByLinkedList<TKey, TValue> : IMinPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
     {
         private readonly CustomSinglyLinkedList<PriorityItem<TKey, TValue>> _linkedList = new();
 
@@ -40,7 +40,7 @@ namespace DataStructures.PriorityQueue
             return comparer.Compare(left, right) < 0;
         }
 
-        public TValue GetMinimum()
+        public TValue PeekMinimum()
         {
             var head = _linkedList.GetHead();
             if (head == null)
@@ -59,5 +59,7 @@ namespace DataStructures.PriorityQueue
 
             return head.Value.Value!;
         }
+
+        public uint Count => (uint)_linkedList.Count();
     }
 }

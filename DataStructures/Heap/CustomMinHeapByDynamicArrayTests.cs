@@ -79,5 +79,56 @@ namespace DataStructures.Heap
             var extractMinEmpty = () => heap.ExtractMin();
             extractMinEmpty.Should().Throw<InvalidOperationException>();
         }
+
+        [Test]
+        public void MinHeap_DecreaseKey()
+        {
+            // arrange
+            var heap = new CustomMinHeapByDynamicArray<int, int>();
+            heap.Insert(1, 5);
+            heap.Insert(2, 6);
+            heap.Insert(3, 7);
+            heap.Insert(4, 8);
+
+            // act
+            heap.DecreaseKey(8, 0);
+
+            // assert
+            heap.PeekMin().Should().Be(8);
+        }
+
+        [Test]
+        public void MinHeap_DecreaseKey_ThrowsIfKeyIsBigger()
+        {
+            // arrange
+            var heap = new CustomMinHeapByDynamicArray<int, int>();
+            heap.Insert(1, 5);
+            heap.Insert(2, 6);
+            heap.Insert(3, 7);
+            heap.Insert(4, 8);
+
+            // act
+            var decreaseKey = () => heap.DecreaseKey(8, 5);
+
+            // assert
+            decreaseKey.Should().Throw<InvalidOperationException>();
+        }
+
+        [Test]
+        public void MinHeap_DecreaseKey_ThrowsIfValueNotFound()
+        {
+            // arrange
+            var heap = new CustomMinHeapByDynamicArray<int, int>();
+            heap.Insert(1, 5);
+            heap.Insert(2, 6);
+            heap.Insert(3, 7);
+            heap.Insert(4, 8);
+
+            // act
+            var decreaseKey = () => heap.DecreaseKey(10, 0);
+
+            // assert
+            decreaseKey.Should().Throw<InvalidOperationException>();
+        }
     }
 }

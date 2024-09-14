@@ -32,5 +32,17 @@
         /// Clear heap.
         /// </summary>
         void Clear();
+
+        /// <summary>
+        /// Increase key of given value.
+        /// </summary>
+        /// <param name="value">Value to look for.</param>
+        /// <param name="newKey">New key.</param>
+        void IncreaseKey(TValue value, TKey newKey);
+
+        /// <summary>
+        /// Number of elements.
+        /// </summary>
+        uint Count { get; }
     }
 }

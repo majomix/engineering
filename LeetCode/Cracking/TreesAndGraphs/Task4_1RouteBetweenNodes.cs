@@ -1,5 +1,5 @@
-﻿using Algorithms.Graph;
-using Algorithms.Graph.DataStructures;
+﻿using Algorithms.Graph.DataStructures;
+using Algorithms.Graph.SegmentedSearch;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -28,7 +28,7 @@ namespace LeetCode.Cracking.TreesAndGraphs
     [TestFixture]
     internal class Task4_1RouteBetweenNodesTests
     {
-        private static object[] testCases =
+        private static readonly object[] testCases =
         {
             new object[] { 1, 5, true },
             new object[] { 2, 5, true },

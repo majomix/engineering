@@ -13,12 +13,17 @@
         /// Returns the maximum element from the priority queue without removing it.
         /// </summary>
         /// <returns>Maximum element.</returns>
-        TValue GetMaximum();
+        TValue PeekMaximum();
 
         /// <summary>
         /// Extracts the maximum element from the priority queue.
         /// </summary>
         /// <returns>Maximum element.</returns>
         TValue ExtractMaximum();
+
+        /// <summary>
+        /// Number of elements.
+        /// </summary>
+        uint Count { get; }
     }
 }

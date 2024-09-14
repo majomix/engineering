@@ -29,8 +29,20 @@
         void BuildHeap(TValue[] items, Func<TValue, TKey> keySelector);
         
         /// <summary>
+        /// Decreases key of given value.
+        /// </summary>
+        /// <param name="value">Value to look for.</param>
+        /// <param name="newKey">New key.</param>
+        void DecreaseKey(TValue value, TKey newKey);
+
+        /// <summary>
         /// Clear heap.
         /// </summary>
         void Clear();
+
+        /// <summary>
+        /// Number of elements.
+        /// </summary>
+        uint Count { get; }
     }
 }

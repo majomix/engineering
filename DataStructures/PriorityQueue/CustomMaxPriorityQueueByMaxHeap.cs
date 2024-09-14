@@ -5,7 +5,7 @@ namespace DataStructures.PriorityQueue
     /// <summary>
     /// Custom implementation of priority queue (priority given to the largest keys) by max-heap.
     /// </summary>
-    internal class CustomMaxPriorityQueueByMaxHeap<TKey, TValue> : IMaxPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
+    public class CustomMaxPriorityQueueByMaxHeap<TKey, TValue> : IMaxPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
     {
         private readonly CustomMaxHeapByDynamicArray<TKey, TValue> _heap = new();
 
@@ -14,7 +14,7 @@ namespace DataStructures.PriorityQueue
             _heap.Insert(key, value);
         }
 
-        public TValue GetMaximum()
+        public TValue PeekMaximum()
         {
             return _heap.PeekMax();
         }
@@ -23,5 +23,12 @@ namespace DataStructures.PriorityQueue
         {
             return _heap.ExtractMax();
         }
+
+        public void IncreasePriority(TValue value, TKey newKey)
+        {
+            _heap.IncreaseKey(value, newKey);
+        }
+
+        public uint Count => _heap.Count;
     }
 }

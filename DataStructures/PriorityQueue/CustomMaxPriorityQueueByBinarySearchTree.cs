@@ -5,7 +5,7 @@ namespace DataStructures.PriorityQueue
     /// <summary>
     /// Custom implementation of priority queue (priority given to the largest keys) by binary search tree.
     /// </summary>
-    internal class CustomMaxPriorityQueueByBinarySearchTree<TKey, TValue> : IMaxPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
+    public class CustomMaxPriorityQueueByBinarySearchTree<TKey, TValue> : IMaxPriorityQueue<TKey, TValue> where TKey : IComparable<TKey>
     {
         private readonly CustomBinarySearchTree<PriorityItem<TKey, TValue>> _tree = new();
 
@@ -14,7 +14,7 @@ namespace DataStructures.PriorityQueue
             _tree.Insert(new PriorityItem<TKey, TValue> { Key = key, Value = value });
         }
 
-        public TValue GetMaximum()
+        public TValue PeekMaximum()
         {
             return GetMaximumItem().Value!;
         }
@@ -41,5 +41,7 @@ namespace DataStructures.PriorityQueue
 
             return current.Value;
         }
+
+        public uint Count => (uint)_tree.Count();
     }
 }

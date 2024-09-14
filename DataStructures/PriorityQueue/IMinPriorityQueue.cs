@@ -13,12 +13,17 @@
         /// Returns the minimum element from the priority queue without removing it.
         /// </summary>
         /// <returns>Minimum element.</returns>
-        TValue GetMinimum();
+        TValue PeekMinimum();
 
         /// <summary>
         /// Extracts the minimum element from the priority queue.
         /// </summary>
         /// <returns>Minimum element.</returns>
         TValue ExtractMinimum();
+
+        /// <summary>
+        /// Number of elements.
+        /// </summary>
+        uint Count { get; }
     }
 }
