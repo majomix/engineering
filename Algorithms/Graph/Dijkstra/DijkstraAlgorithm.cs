@@ -43,10 +43,11 @@ public class DijkstraAlgorithm
             foreach (var neighbor in graph.Vertices[minimum].Adjacency)
             {
                 var newWeight = neighbor.Weight + result.PathWeight[minimum];
-                
+                var oldWeight = result.PathWeight[neighbor.TargetVertexId];
+
                 // if there is a shorter path through currently processed minimum vertex to this neighbor, relax the distance and set new predecessor
                 // important: filter out unreachable vertices
-                if (result.PathWeight[minimum] != DijkstraResult.Infinity && newWeight < result.PathWeight[neighbor.TargetVertexId])
+                if (result.PathWeight[minimum] != DijkstraResult.Infinity && newWeight < oldWeight)
                 {
                     result.PathWeight[neighbor.TargetVertexId] = newWeight;
                     result.PreviousVertex[neighbor.TargetVertexId] = minimum;
