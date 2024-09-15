@@ -2,6 +2,9 @@
 
 namespace DataStructures.Tree.BinarySearchTree.Enumerator
 {
+    /// <summary>
+    /// Purpose: Retrieve keys in ascending sorted order.
+    /// </summary>
     public struct BstInOrderEnumerator<T> : IEnumerator<T>
     {
         private readonly BinaryTreeNode<T>? _root;
