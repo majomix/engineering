@@ -2,21 +2,20 @@
 
 namespace Algorithms.Graph.BellmanFord;
 
-
 internal class BellmanFordAlgorithm
 {
     /// <summary>
     /// Purpose:
-    /// Find shortest path from source vertex to all other vertices in a directed graph with negative weights.
+    /// Find the shortest path from source vertex to all other vertices in a directed graph with negative weights.
     /// Detect negative cycle.
     ///
     /// Complexity:
-    /// Time: O(|E|*|V|))
+    /// Time: O(|E|*|V|)
     /// Space: O(|V|)
     /// </summary>
     /// <param name="graph">Directed graph with positive or negative weights.</param>
     /// <param name="sourceVertex">Source vertex.</param>
-    /// <returns>Map of all target vertices with shortest path and a predecessor vertex on that shortest path.</returns>
+    /// <returns>Map of all target vertices with the shortest path and a predecessor vertex on that shortest path.</returns>
     public BellmanFordResult FindShortestPath(GraphByAdjacencyList graph, int sourceVertex)
     {
         var result = new BellmanFordResult();

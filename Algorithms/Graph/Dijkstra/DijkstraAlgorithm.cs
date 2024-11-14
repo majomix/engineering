@@ -7,7 +7,7 @@ public class DijkstraAlgorithm
 {
     /// <summary>
     /// Purpose:
-    /// Find shortest path from source vertex to all other vertices in a directed acyclic graph with non-negative weights.
+    /// Find the shortest path from source vertex to all other vertices in a directed acyclic graph with non-negative weights.
     ///
     /// Complexity:
     /// Time: O(|E|+|V|*log(|V|))
@@ -15,7 +15,7 @@ public class DijkstraAlgorithm
     /// </summary>
     /// <param name="graph">DAG with non-negative weights.</param>
     /// <param name="sourceVertex">Source vertex.</param>
-    /// <returns>Map of all target vertices with shortest path and a predecessor vertex on that shortest path.</returns>
+    /// <returns>Map of all target vertices with the shortest path and a predecessor vertex on that shortest path.</returns>
     public DijkstraResult FindShortestPath(GraphByAdjacencyList graph, int sourceVertex)
     {
         var result = new DijkstraResult();
