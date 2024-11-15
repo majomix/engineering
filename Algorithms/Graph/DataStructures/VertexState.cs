@@ -3,6 +3,7 @@
     public enum VertexState
     {
         Unvisited,
+        Visiting,
         Visited
     }
 }

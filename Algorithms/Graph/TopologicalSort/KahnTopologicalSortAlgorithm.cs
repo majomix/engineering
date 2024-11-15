@@ -4,6 +4,16 @@ namespace Algorithms.Graph.TopologicalSort;
 
 public class KahnTopologicalSortAlgorithm
 {
+    /// <summary>
+    /// Purpose:
+    /// Sort items in a directed acyclic graph in such way that each vertex appears before all the vertices it points to.
+    ///
+    /// Complexity:
+    /// Time: O(|V|+|E|)
+    /// Space: O(|V|)
+    /// </summary>
+    /// <param name="graph">Graph to search through.</param>
+    /// <returns>List of vertex ids in a topologically sorted order or a list with element -1 if no such order exists.</returns>
     public List<int> TopologicalSort(GraphByAdjacencyList graph)
     {
         var topologicallySortedVertices = new List<int>();
