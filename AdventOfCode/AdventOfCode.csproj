@@ -8,6 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="2024\day1.txt" />
+    <None Remove="2024\day2.txt" />
+    <None Remove="2024\day3.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="2024\day1.txt" />
+    <EmbeddedResource Include="2024\day2.txt" />
+    <EmbeddedResource Include="2024\day3.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="7.0.0" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.18.3" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataStructures\DataStructures.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Day1\puzzle1input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
