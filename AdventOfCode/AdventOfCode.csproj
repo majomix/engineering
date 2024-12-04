@@ -11,12 +11,14 @@
     <None Remove="2024\day1.txt" />
     <None Remove="2024\day2.txt" />
     <None Remove="2024\day3.txt" />
+    <None Remove="2024\day4.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="2024\day1.txt" />
     <EmbeddedResource Include="2024\day2.txt" />
     <EmbeddedResource Include="2024\day3.txt" />
+    <EmbeddedResource Include="2024\day4.txt" />
   </ItemGroup>
 
   <ItemGroup>
