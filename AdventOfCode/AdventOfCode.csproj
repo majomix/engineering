@@ -12,6 +12,7 @@
     <None Remove="2024\day2.txt" />
     <None Remove="2024\day3.txt" />
     <None Remove="2024\day4.txt" />
+    <None Remove="2024\day5.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
     <EmbeddedResource Include="2024\day2.txt" />
     <EmbeddedResource Include="2024\day3.txt" />
     <EmbeddedResource Include="2024\day4.txt" />
+    <EmbeddedResource Include="2024\day5.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Algorithms\Algorithms.csproj" />
     <ProjectReference Include="..\DataStructures\DataStructures.csproj" />
   </ItemGroup>
 
