@@ -9,7 +9,7 @@ namespace DataStructures.Tree.BinarySearchTree.Enumerator
     {
         private readonly BinaryTreeNode<T>? _root;
         private readonly Queue<T> _treeSnapshot = new();
-        private T _current = default;
+        private T _current = default!;
 
         public BstInOrderEnumerator(CustomBinarySearchTree<T> tree)
         {

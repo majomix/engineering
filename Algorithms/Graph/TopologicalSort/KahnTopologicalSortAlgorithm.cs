@@ -2,7 +2,7 @@
 
 namespace Algorithms.Graph.TopologicalSort;
 
-public class KahnTopologicalSortAlgorithm
+public class KahnTopologicalSortAlgorithm<T> where T : notnull
 {
     /// <summary>
     /// Purpose:
@@ -14,9 +14,9 @@ public class KahnTopologicalSortAlgorithm
     /// </summary>
     /// <param name="graph">Graph to search through.</param>
     /// <returns>List of vertex ids in a topologically sorted order or a list with element -1 if no such order exists.</returns>
-    public List<int> TopologicalSort(GraphByAdjacencyList graph)
+    public List<T> TopologicalSort(GraphByAdjacencyList<T> graph)
     {
-        var topologicallySortedVertices = new List<int>();
+        var topologicallySortedVertices = new List<T>();
         var vertexToCountOfIncomingEdgesMap = CreateMapOfIncomingEdges(graph);
         var verticesWithNoIncomingEdges = CreateQueueOfVerticesWithNoIncomingEdges(graph, vertexToCountOfIncomingEdgesMap);
 
@@ -39,15 +39,15 @@ public class KahnTopologicalSortAlgorithm
 
         if (topologicallySortedVertices.Count != graph.Vertices.Count)
         {
-            return new List<int> { -1 };
+            return new List<T>();
         }
 
         return topologicallySortedVertices;
     }
 
-    private Dictionary<int, int> CreateMapOfIncomingEdges(GraphByAdjacencyList graph)
+    private Dictionary<T, int> CreateMapOfIncomingEdges(GraphByAdjacencyList<T> graph)
     {
-        var vertexToCountOfIncomingEdgesMap = new Dictionary<int, int>();
+        var vertexToCountOfIncomingEdgesMap = new Dictionary<T, int>();
 
         foreach (var vertex in graph.Vertices.Values)
         {
@@ -65,9 +65,9 @@ public class KahnTopologicalSortAlgorithm
         return vertexToCountOfIncomingEdgesMap;
     }
 
-    private Queue<int> CreateQueueOfVerticesWithNoIncomingEdges(GraphByAdjacencyList graph, Dictionary<int, int> vertexToCountOfIncomingEdgesMap)
+    private Queue<T> CreateQueueOfVerticesWithNoIncomingEdges(GraphByAdjacencyList<T> graph, Dictionary<T, int> vertexToCountOfIncomingEdgesMap)
     {
-        var verticesWithNoIncomingEdges = new Queue<int>();
+        var verticesWithNoIncomingEdges = new Queue<T>();
         foreach (var vertex in graph.Vertices.Values)
         {
             if (vertexToCountOfIncomingEdgesMap[vertex.Id] == 0)

@@ -14,14 +14,14 @@ namespace LeetCode.Cracking.TreesAndGraphs
     /// </summary>
     internal class Task4_1RouteBetweenNodes
     {
-        public bool HasRouteByDepthFirst(GraphByAdjacencyList graph, int sourceVertex, int targetVertex)
+        public bool HasRouteByDepthFirst(GraphByAdjacencyList<int> graph, int sourceVertex, int targetVertex)
         {
-            return new DepthFirstSearchAlgorithm().DepthFirstSearch(graph, sourceVertex, targetVertex);
+            return new DepthFirstSearchAlgorithm<int>().DepthFirstSearch(graph, sourceVertex, targetVertex);
         }
 
-        public bool HasRouteByBreadthFirst(GraphByAdjacencyList graph, int sourceVertex, int targetVertex)
+        public bool HasRouteByBreadthFirst(GraphByAdjacencyList<int> graph, int sourceVertex, int targetVertex)
         {
-            return new BreadthFirstSearchAlgorithm().BreadthFirstSearch(graph, sourceVertex, targetVertex);
+            return new BreadthFirstSearchAlgorithm<int>().BreadthFirstSearch(graph, sourceVertex, targetVertex);
         }
     }
 
@@ -40,7 +40,7 @@ namespace LeetCode.Cracking.TreesAndGraphs
         {
             // arrange
             var sut = new Task4_1RouteBetweenNodes();
-            var graph = new GraphByAdjacencyList();
+            var graph = new GraphByAdjacencyList<int>();
             graph.AddVertex(1, new [] { 2, 3, 4, 5 });
             graph.AddVertex(2, new[] { 3 });
             graph.AddVertex(3, new[] { 4, 5 });
@@ -59,7 +59,7 @@ namespace LeetCode.Cracking.TreesAndGraphs
         {
             // arrange
             var sut = new Task4_1RouteBetweenNodes();
-            var graph = new GraphByAdjacencyList();
+            var graph = new GraphByAdjacencyList<int>();
             graph.AddVertex(1, new[] { 2, 3, 4, 5 });
             graph.AddVertex(2, new[] { 3 });
             graph.AddVertex(3, new[] { 4, 5 });

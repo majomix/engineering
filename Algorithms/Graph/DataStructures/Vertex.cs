@@ -1,11 +1,11 @@
 ﻿namespace Algorithms.Graph.DataStructures
 {
-    public class Vertex
+    public class Vertex<T>
     {
-        public int Id { get; set; }
+        public T Id { get; set; }
 
         public VertexState State { get; set; }
 
-        public List<Edge> Adjacency { get; set; } = new();
+        public List<Edge<T>> Adjacency { get; set; } = new();
     }
 }

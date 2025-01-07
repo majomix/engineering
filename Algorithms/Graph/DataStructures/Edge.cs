@@ -1,9 +1,9 @@
 ﻿namespace Algorithms.Graph.DataStructures
 {
-    public class Edge
+    public class Edge<T>
     {
         public int Weight { get; set; } = 1;
 
-        public int TargetVertexId { get; set; }
+        public T TargetVertexId { get; set; }
     }
 }

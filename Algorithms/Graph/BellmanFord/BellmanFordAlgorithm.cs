@@ -16,7 +16,7 @@ internal class BellmanFordAlgorithm
     /// <param name="graph">Directed graph with positive or negative weights.</param>
     /// <param name="sourceVertex">Source vertex.</param>
     /// <returns>Map of all target vertices with the shortest path and a predecessor vertex on that shortest path.</returns>
-    public BellmanFordResult FindShortestPath(GraphByAdjacencyList graph, int sourceVertex)
+    public BellmanFordResult FindShortestPath(GraphByAdjacencyList<int> graph, int sourceVertex)
     {
         var result = new BellmanFordResult();
 

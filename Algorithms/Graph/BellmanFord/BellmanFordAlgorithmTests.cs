@@ -13,7 +13,7 @@ public class BellmanFordAlgorithmTests
         // arrange
         var sut = new BellmanFordAlgorithm();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, new[] { (2, 5), (3, 3), (5, 2) });
         graph.AddVertex(2, new[] { (4, 2) });
         graph.AddVertex(3, new[] { (2, 1), (4, 1) });
@@ -53,7 +53,7 @@ public class BellmanFordAlgorithmTests
         // arrange
         var sut = new BellmanFordAlgorithm();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, new[] { (2, 10), (3, 5) });
         graph.AddVertex(2, new[] { (3, 2), (4, 1) });
         graph.AddVertex(3, new[] { (2, 3), (4, 9), (5, 2) });
@@ -81,7 +81,7 @@ public class BellmanFordAlgorithmTests
         // arrange
         var sut = new BellmanFordAlgorithm();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, new[] { (2, 6), (3, 7) });
         graph.AddVertex(2, new[] { (3, 8), (4, 5), (5, -4) });
         graph.AddVertex(3, new[] { (4, -3), (5, 9) });
@@ -109,7 +109,7 @@ public class BellmanFordAlgorithmTests
         // arrange
         var sut = new BellmanFordAlgorithm();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, Array.Empty<(int, int)>());
         graph.AddVertex(2, new[] { (4, -6) });
         graph.AddVertex(3, new[] { (2, -2) });
@@ -128,7 +128,7 @@ public class BellmanFordAlgorithmTests
         // arrange
         var sut = new BellmanFordAlgorithm();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, new[] { (2, 5) });
         graph.AddVertex(2, new[] { (3, 1), (4, 2) });
         graph.AddVertex(3, new[] { (5, 1) });

@@ -11,9 +11,9 @@ public class DijkstraAlgorithmTests
     public void Dijkstra_FindShortestPathTest_McDowell()
     {
         // arrange
-        var sut = new DijkstraAlgorithm();
+        var sut = new DijkstraAlgorithm<int>();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, new[] { (2, 5), (3, 3), (5, 2) });
         graph.AddVertex(2, new[] { (4, 2) });
         graph.AddVertex(3, new[] { (2, 1), (4, 1) });
@@ -51,9 +51,9 @@ public class DijkstraAlgorithmTests
     public void Dijkstra_FindShortestPathTest_Navrat()
     {
         // arrange
-        var sut = new DijkstraAlgorithm();
+        var sut = new DijkstraAlgorithm<int>();
 
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         graph.AddVertex(1, new[] { (2, 10), (3, 5) });
         graph.AddVertex(2, new[] { (3, 2), (4, 1) });
         graph.AddVertex(3, new[] { (2, 3), (4, 9), (5, 2) });

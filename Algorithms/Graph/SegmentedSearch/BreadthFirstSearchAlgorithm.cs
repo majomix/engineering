@@ -3,7 +3,7 @@ using DataStructures.Queue;
 
 namespace Algorithms.Graph.SegmentedSearch;
 
-public class BreadthFirstSearchAlgorithm
+public class BreadthFirstSearchAlgorithm<T> where T : notnull
 {
     /// <summary>
     /// Purpose:
@@ -18,9 +18,9 @@ public class BreadthFirstSearchAlgorithm
     /// <param name="vertexId">ID of starting vertex.</param>
     /// <param name="searchedVertexId">ID of searched vertex.</param>
     /// <returns>True if path exists, false otherwise.</returns>
-    public bool BreadthFirstSearch(GraphByAdjacencyList graph, int vertexId, int searchedVertexId)
+    public bool BreadthFirstSearch(GraphByAdjacencyList<T> graph, T vertexId, T searchedVertexId)
     {
-        var queue = new CustomQueueByCircularArray<Vertex>();
+        var queue = new CustomQueueByCircularArray<Vertex<T>>();
 
         queue.Enqueue(graph.Vertices[vertexId]);
 
@@ -34,7 +34,8 @@ public class BreadthFirstSearchAlgorithm
             var currentVertexInfo = graph.Vertices[currentVertex.Id];
             currentVertexInfo.State = VertexState.Visited;
 
-            if (currentVertex.Id == searchedVertexId)
+            var comparator = EqualityComparer<T>.Default;
+            if (comparator.Equals(currentVertex.Id, searchedVertexId))
             {
                 return true;
             }

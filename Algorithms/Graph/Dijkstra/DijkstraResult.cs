@@ -1,10 +1,10 @@
 ﻿namespace Algorithms.Graph.Dijkstra;
 
-public class DijkstraResult
+public class DijkstraResult<T>
 {
     public const int Infinity = int.MaxValue;
-    public const int UnknownParent = int.MinValue;
+    public static readonly T UnknownParent = default;
 
-    public Dictionary<int, int> PathWeight { get; } = new();
-    public Dictionary<int, int> PreviousVertex { get; } = new();
+    public Dictionary<T, int> PathWeight { get; } = new();
+    public Dictionary<T, T> PreviousVertex { get; } = new();
 }

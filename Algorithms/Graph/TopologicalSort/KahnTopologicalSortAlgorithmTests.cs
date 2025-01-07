@@ -12,7 +12,7 @@ internal class KahnTopologicalSortAlgorithmTests
     {
         // arrange
         var graph = CreateGraphByMcDowellPg250();
-        var kahnAlgorithm = new KahnTopologicalSortAlgorithm();
+        var kahnAlgorithm = new KahnTopologicalSortAlgorithm<int>();
         
         // act
         var topologicalSort = kahnAlgorithm.TopologicalSort(graph);
@@ -26,18 +26,18 @@ internal class KahnTopologicalSortAlgorithmTests
     {
         // arrange
         var graph = CreateGraphWithCycle();
-        var kahnAlgorithm = new KahnTopologicalSortAlgorithm();
+        var kahnAlgorithm = new KahnTopologicalSortAlgorithm<int>();
 
         // act
         var topologicalSort = kahnAlgorithm.TopologicalSort(graph);
 
         // assert
-        topologicalSort.Should().BeEquivalentTo(new[] { -1 });
+        topologicalSort.Should().BeEmpty();
     }
 
-    private GraphByAdjacencyList CreateGraphByMcDowellPg250()
+    private GraphByAdjacencyList<int> CreateGraphByMcDowellPg250()
     {
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
         
         graph.AddVertex(1, new[] { 2, 3 });
         graph.AddVertex(2, new[] { 4 });
@@ -50,9 +50,9 @@ internal class KahnTopologicalSortAlgorithmTests
         return graph;
     }
 
-    private GraphByAdjacencyList CreateGraphWithCycle()
+    private GraphByAdjacencyList<int> CreateGraphWithCycle()
     {
-        var graph = new GraphByAdjacencyList();
+        var graph = new GraphByAdjacencyList<int>();
 
         graph.AddVertex(1, new[] { 2, 3 });
         graph.AddVertex(2, new[] { 4 });

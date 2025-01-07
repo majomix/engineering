@@ -2,7 +2,7 @@
 
 namespace Algorithms.Graph.TopologicalSort
 {
-    public class DepthFirstSearchTopologicalSortAlgorithm
+    public class DepthFirstSearchTopologicalSortAlgorithm<T> where T : notnull
     {
         /// <summary>
         /// Purpose:
@@ -14,9 +14,9 @@ namespace Algorithms.Graph.TopologicalSort
         /// </summary>
         /// <param name="graph">Graph to search through.</param>
         /// <returns>List of vertex ids in a topologically sorted order or a list with element -1 if no such order exists.</returns>
-        public List<int> TopologicalSort(GraphByAdjacencyList graph)
+        public List<T> TopologicalSort(GraphByAdjacencyList<T> graph)
         {
-            var topologicallySortedVertices = new List<int>();
+            var topologicallySortedVertices = new List<T>();
 
             var topologicalSortExists = true;
 
@@ -27,7 +27,7 @@ namespace Algorithms.Graph.TopologicalSort
 
             if (!topologicalSortExists)
             {
-                return new List<int> { -1 };
+                return new List<T>();
             }
 
             topologicallySortedVertices.Reverse();
@@ -35,7 +35,7 @@ namespace Algorithms.Graph.TopologicalSort
             return topologicallySortedVertices;
         }
 
-        private bool DepthFirstTopologicalSort(GraphByAdjacencyList graph, Vertex vertexToProcess, List<int> sortedVertices)
+        private bool DepthFirstTopologicalSort(GraphByAdjacencyList<T> graph, Vertex<T> vertexToProcess, List<T> sortedVertices)
         {
             if (vertexToProcess.State == VertexState.Visited)
                 return true;

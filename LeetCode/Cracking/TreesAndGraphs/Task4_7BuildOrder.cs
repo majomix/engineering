@@ -22,7 +22,7 @@ namespace LeetCode.Cracking.TreesAndGraphs
     {
         public string[] FindBuildOrder(string[] projects, string[][] dependencies)
         {
-            var graph = new GraphByAdjacencyList();
+            var graph = new GraphByAdjacencyList<int>();
             var nameToVertexIdMap = new Dictionary<string, int>();
 
             // build empty graph
@@ -38,13 +38,13 @@ namespace LeetCode.Cracking.TreesAndGraphs
                 var dependingProject = nameToVertexIdMap[dependency[0]];
                 var dependsOn = nameToVertexIdMap[dependency[1]];
 
-                var edge = new Edge { TargetVertexId = dependsOn };
+                var edge = new Edge<int> { TargetVertexId = dependsOn };
 
                 graph.Vertices[dependingProject].Adjacency.Add(edge);
             }
 
             // perform topological sort
-            var topologicalSortAlgorithm = new KahnTopologicalSortAlgorithm();
+            var topologicalSortAlgorithm = new KahnTopologicalSortAlgorithm<int>();
             var topologicalSort = topologicalSortAlgorithm.TopologicalSort(graph);
 
             // re-build the project names in topological sort order

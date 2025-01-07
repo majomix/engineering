@@ -2,7 +2,7 @@
 
 namespace Algorithms.Graph.SegmentedSearch;
 
-public class DepthFirstSearchAlgorithm
+public class DepthFirstSearchAlgorithm<T> where T : notnull, IEquatable<T>
 {
     /// <summary>
     /// Purpose:
@@ -16,7 +16,7 @@ public class DepthFirstSearchAlgorithm
     /// <param name="vertexId">ID of starting vertex.</param>
     /// <param name="searchedVertexId">ID of searched vertex.</param>
     /// <returns>True if path exists, false otherwise.</returns>
-    public bool DepthFirstSearch(GraphByAdjacencyList graph, int vertexId, int searchedVertexId)
+    public bool DepthFirstSearch(GraphByAdjacencyList<T> graph, T vertexId, T searchedVertexId)
     {
         var currentVertexInfo = graph.Vertices[vertexId];
 
@@ -25,7 +25,8 @@ public class DepthFirstSearchAlgorithm
 
         currentVertexInfo.State = VertexState.Visited;
 
-        if (vertexId == searchedVertexId)
+        var comparator = EqualityComparer<T>.Default;
+        if (comparator.Equals(vertexId, searchedVertexId))
             return true;
 
         var result = false;
