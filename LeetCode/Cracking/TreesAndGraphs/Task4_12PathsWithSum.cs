@@ -6,8 +6,8 @@ namespace LeetCode.Cracking.TreesAndGraphs;
 
 /// <summary>
 /// You are given a binary tree in which each node contains an integer value (which might be positive or negative).
-/// Design an algoritm to count the number of paths that will sum to a given value.
-/// The path does not need to start or end at the root or at a leaf but it must go downwards.
+/// Design an algorithm to count the number of paths that will sum to a given value.
+/// The path does not need to start or end at the root or at a leaf, but it must go downwards.
 /// 
 /// Solutions:
 /// * Recursion with memoization.

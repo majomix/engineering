@@ -1,5 +1,4 @@
 ﻿using DataStructures.Tree.BinarySearchTree;
-using NUnit.Framework;
 
 namespace LeetCode.Cracking.TreesAndGraphs;
 
@@ -43,7 +42,6 @@ internal class Task4_11RandomNode
     {
         return tree.GetRandomNode();
     }
-
 }
 
 public class TreeWithRandomNode
