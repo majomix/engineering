@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using System.Diagnostics;
 using System.Drawing;
+using System.Text;
 
 namespace AdventOfCode._2024;
 
@@ -169,23 +169,22 @@ internal static class Day6
     /// 
     /// How many different positions could you choose for this obstruction?
     /// </summary>
-    /// TODO: debug, should work fine
     public static int GetNumberOfObstaclesCausingLoop(string[] input)
     {
-        var distinctVisitedElements = 1;
-
         var obstaclesMap = new HashSet<Point>();
+        var visitedMap = new HashSet<Point>();
         var currentX = 0;
         var currentY = 0;
         var inputChars = ParseInputAndFindStartingPoint(input, ref currentX, ref currentY);
 
-        Debug.WriteLine($"Loop detection for starting point: {currentX}, {currentY}");
         var isInsideBounds = true;
-        var movesInCurrentDirection = 0;
         while (isInsideBounds)
         {
+            //var currentMapState = PrintIntoString(inputChars);
+
             var currentPlayerDirection = inputChars[currentY][currentX];
             var possiblePlayerRotation = currentPlayerDirection;
+            visitedMap.Add(new Point(currentX, currentY));
             var targetX = currentX;
             var targetY = currentY;
             DetermineNextMove(
@@ -201,12 +200,10 @@ internal static class Day6
                 continue;
 
             var canContinueInSameDirection = CanContinueInSameDirection(inputChars, targetX, targetY);
-            var isNextMoveLandingOnUnvisitedPosition = IsNextMoveLandingOnUnvisitedPosition(inputChars, targetX, targetY);
 
-            if (canContinueInSameDirection && movesInCurrentDirection > 0)
+            if (canContinueInSameDirection && !visitedMap.Contains(new Point(targetX, targetY)))
             {
                 var mapWithObstacle = CopyMapWithObstacle(inputChars, targetX, targetY);
-                Debug.WriteLine($"Placing obstacle at {targetX} {targetY}.\nLoop detection at distinct #{distinctVisitedElements}: {currentX}, {currentY}, {inputChars[currentY][currentX]}");
 
                 if (ContainsLoop(mapWithObstacle, currentX, currentY))
                 {
@@ -220,16 +217,6 @@ internal static class Day6
             {
                 currentX = targetX;
                 currentY = targetY;
-                movesInCurrentDirection++;
-            }
-            else
-            {
-                movesInCurrentDirection = 0;
-            }
-
-            if (isNextMoveLandingOnUnvisitedPosition)
-            {
-                distinctVisitedElements++;
             }
         }
 
@@ -287,18 +274,15 @@ internal static class Day6
 
     private static bool ContainsLoop(List<List<char>> map, int currentX, int currentY)
     {
-        var originalX = currentX;
-        var originalY = currentY;
-        var originalDirection = map[currentY][currentX];
-        var hmap = new HashSet<(int, int, char)>();
+        var movesMap = new HashSet<(int, int, char)>();
 
         var steps = 0;
         var isInsideBounds = true;
         while (isInsideBounds)
         {
-            var currentPlayerDirection = map[currentY][currentX];
+            //var currentMapState = PrintIntoString(map);
 
-            //Debug.WriteLine($"{currentX}, {currentY}, {currentPlayerDirection}");
+            var currentPlayerDirection = map[currentY][currentX];
 
             var possiblePlayerRotation = currentPlayerDirection;
             var targetX = currentX;
@@ -315,9 +299,8 @@ internal static class Day6
             if (!isInsideBounds)
                 continue;
 
-            if (steps > 0 && hmap.Contains((currentX, currentY, currentPlayerDirection)))
+            if (steps > 0 && movesMap.Contains((currentX, currentY, currentPlayerDirection)))
             {
-                Debug.WriteLine($"Loop fiund at {currentX} {currentY} in direction {currentPlayerDirection}");
                 return true;
             }
 
@@ -327,29 +310,32 @@ internal static class Day6
 
             if (canContinueInSameDirection)
             {
-                hmap.Add((currentX, currentY, currentPlayerDirection));
+                movesMap.Add((currentX, currentY, currentPlayerDirection));
 
                 currentX = targetX;
                 currentY = targetY;
             }
             steps++;
-
         }
 
-        Debug.WriteLine("Loop not found.");
         return false;
     }
 
-    private static void Print(List<List<char>> map)
+    private static string[] PrintIntoString(List<List<char>> map)
     {
+        var result = new List<string>();
+
         for (var y = 0; y < map.Count; y++)
         {
+            var sb = new StringBuilder();
             for (var x = 0; x < map[y].Count; x++)
             {
-                Debug.Write($"{map[y][x]}");
+                sb.Append($"{map[y][x]}");
             }
-            Debug.WriteLine(string.Empty);
+            result.Add(sb.ToString());
         }
+
+        return result.ToArray();
     }
 }
 
@@ -433,11 +419,33 @@ internal class Day6Tests
         Day6.GetNumberOfObstaclesCausingLoop(input).Should().Be(1);
     }
 
-    //[Test]
+    [Test]
+    public void Day6Task2Example4()
+    {
+        string[] input =
+        {
+            "...........#.....#......",
+            "...................#....",
+            "...#.....##.............",
+            "......................#.",
+            "..................#.....",
+            "..#.....................",
+            "....................#...",
+            "........................",
+            ".#........^.............",
+            "..........#..........#..",
+            "..#.....#..........#....",
+            "........#.....#..#......"
+        };
+
+        Day6.GetNumberOfObstaclesCausingLoop(input).Should().Be(19);
+    }
+
+    [Test]
     public void Day6Task2()
     {
         var input = EmbeddedResourceHelper.GetResourceLines("AdventOfCode._2024.day6.txt");
         var result = Day6.GetNumberOfObstaclesCausingLoop(input);
-        result.Should().Be(0);
+        result.Should().Be(1482);
     }
 }
