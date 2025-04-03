@@ -7,4 +7,5 @@ public class DijkstraResult<T>
 
     public Dictionary<T, int> PathWeight { get; } = new();
     public Dictionary<T, T> PreviousVertex { get; } = new();
+    public Dictionary<T, List<T>> PreviousVertices { get; } = new();
 }

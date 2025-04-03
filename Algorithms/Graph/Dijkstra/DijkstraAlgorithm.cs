@@ -7,13 +7,13 @@ public class DijkstraAlgorithm<T> where T : IComparable<T>
 {
     /// <summary>
     /// Purpose:
-    /// Find the shortest path from source vertex to all other vertices in a directed acyclic graph with non-negative weights.
+    /// Find the shortest path from source vertex to all other vertices in a weighted graph with non-negative weights.
     ///
     /// Complexity:
     /// Time: O(|E|+|V|*log(|V|))
     /// Space: O(|V|)
     /// </summary>
-    /// <param name="graph">DAG with non-negative weights.</param>
+    /// <param name="graph">Weighted graph with non-negative weights.</param>
     /// <param name="sourceVertex">Source vertex.</param>
     /// <returns>Map of all target vertices with the shortest path and a predecessor vertex on that shortest path.</returns>
     public DijkstraResult<T> FindShortestPath(GraphByAdjacencyList<T> graph, T sourceVertex)

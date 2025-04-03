@@ -15,6 +15,8 @@
     <None Remove="2024\day13.txt" />
     <None Remove="2024\day14.txt" />
     <None Remove="2024\day15.txt" />
+    <None Remove="2024\day16.txt" />
+    <None Remove="2024\day17.txt" />
     <None Remove="2024\day19.txt" />
     <None Remove="2024\day2.txt" />
     <None Remove="2024\day24.txt" />
@@ -35,6 +37,8 @@
     <EmbeddedResource Include="2024\day13.txt" />
     <EmbeddedResource Include="2024\day14.txt" />
     <EmbeddedResource Include="2024\day15.txt" />
+    <EmbeddedResource Include="2024\day16.txt" />
+    <EmbeddedResource Include="2024\day17.txt" />
     <EmbeddedResource Include="2024\day19.txt" />
     <EmbeddedResource Include="2024\day2.txt" />
     <EmbeddedResource Include="2024\day24.txt" />

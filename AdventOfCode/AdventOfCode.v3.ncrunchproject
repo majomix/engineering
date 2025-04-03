@@ -16,6 +16,10 @@
       <NamedTestSelector>
         <TestName>AdventOfCode._2024.Day13Tests.Day13Task1</TestName>
       </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>AdventOfCode._2024.Day16Tests.Day16Task2</TestName>
+      </NamedTestSelector>
     </IgnoredTests>
+    <InstrumentOutputAssembly>True</InstrumentOutputAssembly>
   </Settings>
 </ProjectConfiguration>
