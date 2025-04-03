@@ -4,6 +4,18 @@
       <FixtureTestSelector>
         <FixtureName>DayNTests</FixtureName>
       </FixtureTestSelector>
+      <NamedTestSelector>
+        <TestName>AdventOfCode._2024.Day6Tests.Day6Task2</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>AdventOfCode._2024.Day9Tests.Day9Task2</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>AdventOfCode._2024.Day7Tests.Day7Task2</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>AdventOfCode._2024.Day13Tests.Day13Task1</TestName>
+      </NamedTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>
